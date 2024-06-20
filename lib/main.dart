@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animation/screen/cube_moving_screen.dart';
-import 'package:flutter_animation/screen/square_rotation_screen.dart';
+import 'package:flutter_animation/screen/2d_animation_screen.dart';
+import 'package:flutter_animation/screen/hero_animation_screen.dart';
+import 'package:flutter_animation/screen/3d_animation_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,18 +48,27 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const SquareRotationScreen()));
+                      builder: (context) => const ThreeDAnimationScreen()));
                 },
-                child: const Text('Example-1')),
+                child: const Text('2D Animation')),
             const SizedBox(
               height: 20,
             ),
             ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const CubeMovingScreen()));
+                      builder: (context) => const TwoDAnimationScreen()));
                 },
-                child: const Text('Cube Moving Animation'))
+                child: const Text('3D Animation')),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const HeroAnimationScreen()));
+                },
+                child: const Text('Hero Animation')),
           ],
         ),
       ),

@@ -2,16 +2,16 @@ import 'dart:math' show pi;
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' show Vector3;
 
-class CubeMovingScreen extends StatefulWidget {
-  const CubeMovingScreen({super.key});
+class TwoDAnimationScreen extends StatefulWidget {
+  const TwoDAnimationScreen({super.key});
 
   @override
-  State<CubeMovingScreen> createState() => _CubeMovingScreenState();
+  State<TwoDAnimationScreen> createState() => _TwoDAnimationScreenState();
 }
 
 const widthAndHeight = 100.0;
 
-class _CubeMovingScreenState extends State<CubeMovingScreen>
+class _TwoDAnimationScreenState extends State<TwoDAnimationScreen>
     with TickerProviderStateMixin {
   late AnimationController _xController;
   late AnimationController _yController;
@@ -66,7 +66,7 @@ class _CubeMovingScreenState extends State<CubeMovingScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cube Animation'),
+        title: const Text('3D Animation'),
       ),
       body: Center(
         child: Column(

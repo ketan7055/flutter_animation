@@ -2,14 +2,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class SquareRotationScreen extends StatefulWidget {
-  const SquareRotationScreen({super.key});
+class ThreeDAnimationScreen extends StatefulWidget {
+  const ThreeDAnimationScreen({super.key});
 
   @override
-  State<SquareRotationScreen> createState() => _SquareRotationScreenState();
+  State<ThreeDAnimationScreen> createState() => _ThreeDAnimationScreenState();
 }
 
-class _SquareRotationScreenState extends State<SquareRotationScreen>
+class _ThreeDAnimationScreenState extends State<ThreeDAnimationScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
@@ -33,7 +33,7 @@ class _SquareRotationScreenState extends State<SquareRotationScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Square Rotation'),
+        title: const Text('3D Animation'),
       ),
       body: Center(
         child: AnimatedBuilder(
