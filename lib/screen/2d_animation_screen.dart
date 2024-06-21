@@ -1,6 +1,6 @@
-import 'dart:math' show pi;
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:vector_math/vector_math_64.dart' show Vector3;
 
 class TwoDAnimationScreen extends StatefulWidget {
   const TwoDAnimationScreen({super.key});
@@ -9,153 +9,50 @@ class TwoDAnimationScreen extends StatefulWidget {
   State<TwoDAnimationScreen> createState() => _TwoDAnimationScreenState();
 }
 
-const widthAndHeight = 100.0;
-
 class _TwoDAnimationScreenState extends State<TwoDAnimationScreen>
-    with TickerProviderStateMixin {
-  late AnimationController _xController;
-  late AnimationController _yController;
-  late AnimationController _zController;
-  late Tween<double> _animation;
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
-    _xController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 20),
-    );
-
-    _yController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 30),
-    );
-
-    _zController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 40),
-    );
-
-    _animation = Tween<double>(
-      begin: 0,
-      end: pi * 2,
-    );
+    _animationController =
+        AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    _animation =
+        Tween<double>(begin: 0.00, end: 2 * pi).animate(_animationController);
+    _animationController.repeat();
   }
-
-  @override
+@override
   void dispose() {
-    _xController.dispose();
-    _yController.dispose();
-    _zController.dispose();
+  _animationController.dispose();
     super.dispose();
-  }
 
+  }
   @override
   Widget build(BuildContext context) {
-    _xController
-      ..reset()
-      ..repeat();
-
-    _yController
-      ..reset()
-      ..repeat();
-
-    _zController
-      ..reset()
-      ..repeat();
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('3D Animation'),
+        backgroundColor: const Color(0xFFD1C4E9),
+        title: const Text('2D Animation'),
       ),
       body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: widthAndHeight,
-              width: double.infinity,
-            ),
-            AnimatedBuilder(
-              animation: Listenable.merge([
-                _xController,
-                _yController,
-                _zController,
-              ]),
-              builder: (context, child) {
-                return Transform(
-                  alignment: Alignment.center,
-                  transform: Matrix4.identity()
-                    ..rotateX(_animation.evaluate(_xController))
-                    ..rotateY(_animation.evaluate(_yController))
-                    ..rotateZ(_animation.evaluate(_zController)),
-                  child: Stack(
-                    children: [
-                      // back
-                      Transform(
-                        alignment: Alignment.center,
-                        transform: Matrix4.identity()
-                          ..translate(Vector3(0, 0, -widthAndHeight)),
-                        child: Container(
-                          color: Colors.purple,
-                          width: widthAndHeight,
-                          height: widthAndHeight,
-                        ),
-                      ),
-                      // left side
-                      Transform(
-                        alignment: Alignment.centerLeft,
-                        transform: Matrix4.identity()..rotateY(pi / 2.0),
-                        child: Container(
-                          color: Colors.red,
-                          width: widthAndHeight,
-                          height: widthAndHeight,
-                        ),
-                      ),
-                      // // left side
-                      Transform(
-                        alignment: Alignment.centerRight,
-                        transform: Matrix4.identity()..rotateY(-pi / 2.0),
-                        child: Container(
-                          color: Colors.blue,
-                          width: widthAndHeight,
-                          height: widthAndHeight,
-                        ),
-                      ),
-                      // // front
-                      Container(
-                        color: Colors.green,
-                        width: widthAndHeight,
-                        height: widthAndHeight,
-                      ),
-                      // // top side
-                      Transform(
-                        alignment: Alignment.topCenter,
-                        transform: Matrix4.identity()..rotateX(-pi / 2.0),
-                        child: Container(
-                          color:const Color(0xFFE1BEE7),
-                          width: widthAndHeight,
-                          height: widthAndHeight,
-                        ),
-                      ),
-                      // // bottom side
-                      Transform(
-                        alignment: Alignment.bottomCenter,
-                        transform: Matrix4.identity()..rotateX(pi / 2.0),
-                        child: Container(
-                          color: Colors.indigoAccent,
-                          width: widthAndHeight,
-                          height: widthAndHeight,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ],
+        child: AnimatedBuilder(
+          animation: _animationController,
+          builder: (context, child) {
+            return Transform(
+              origin: const Offset(100, 100), // change the origin of the rotation
+              transform: Matrix4.identity()..rotateZ(_animation.value),
+              child: Container(
+                width: 200,
+                height: 200,
+                color: Colors.blueAccent,
+              ),
+            );
+          }
         ),
       ),
     );
   }
+
 }

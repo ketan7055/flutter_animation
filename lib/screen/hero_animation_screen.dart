@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animation/person_model.dart';
+import 'package:flutter_animation/screen/hero_detail_screen.dart';
 
 class HeroAnimationScreen extends StatefulWidget {
   const HeroAnimationScreen({super.key});
@@ -22,6 +23,7 @@ class _HeroAnimationScreenState extends State<HeroAnimationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          backgroundColor: const Color(0xFFD1C4E9),
         title: const Text('Hero Animation'),
       ),
       body: ListView.builder(
@@ -31,7 +33,22 @@ class _HeroAnimationScreenState extends State<HeroAnimationScreen> {
             final user = person[index];
 
             return ListTile(
-              leading: Text(user.emoji, style: TextStyle(fontSize: 30),),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HeroDetailsScreen(person: user),
+                  ),
+                );
+              },
+              trailing: const Icon(Icons.navigate_next_sharp),
+              leading: Hero(
+                tag: user.name,
+                child: Text(
+                  user.emoji,
+                  style: const TextStyle(fontSize: 30),
+                ),
+              ),
               title: Text(user.name),
               subtitle: Text(user.age.toString()),
             );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animation/screen/2d_animation_screen.dart';
-import 'package:flutter_animation/screen/hero_animation_screen.dart';
 import 'package:flutter_animation/screen/3d_animation_screen.dart';
+import 'package:flutter_animation/screen/hero_animation_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Animation',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFFB39DDB)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Animation'),
@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const ThreeDAnimationScreen()));
+                      builder: (context) => const TwoDAnimationScreen()));
                 },
                 child: const Text('2D Animation')),
             const SizedBox(
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const TwoDAnimationScreen()));
+                      builder: (context) => const ThreeDAnimationScreen()));
                 },
                 child: const Text('3D Animation')),
             const SizedBox(
